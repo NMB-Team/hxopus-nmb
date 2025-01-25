@@ -3,30 +3,23 @@ package hxopus;
 import cpp.Lib;
 import haxe.io.Bytes;
 import openfl.media.Sound;
-import openfl.utils.Assets;
 import openfl.utils.ByteArray;
 
 class Opus {
 	public static function getVersionString():String {
-		return _getVersionString();
+		return _getVersion();
 	}
 
-	public static function toOpenFL(bytes:Bytes) {
+	public static function toOpenFL(bytes:Bytes):Sound {
 		var sound:Sound = new Sound();
+		var frames:Bytes = Bytes.ofData(_decodeBytes(bytes.getData()));
 
-		var bytesPerSample:Int = 2;
-		var channels:Int = 2;
-		var rate:Int = 48000;
-
-		var bytes:Bytes = Bytes.ofData(decode(bytes.getData(), rate));
-
-		trace(bytes);
-
-		sound.loadPCMFromByteArray(ByteArray.fromBytes(bytes), Std.int(bytes.length / (bytesPerSample * channels)), "short", (channels == 2), rate);
-
+		// 4 because 2 channels (stereo) times 2 bytes per pcm frame (short16)
+		var frameCount:Int = Math.floor(frames.length / 4);
+		sound.loadPCMFromByteArray(ByteArray.fromBytes(frames), frameCount, "short", true, 48000);
 		return sound;
 	}
 
-	static var _getVersionString = Lib.load("hxopus", "hxopus_get_version_string", 0);
-	static var decode = Lib.load("hxopus", "hxopus_to_bytes_data", 2);
+	private static var _getVersion:Dynamic = Lib.load("hxopus", "hxopus_get_version_string", 0);
+	private static var _decodeBytes:Dynamic = Lib.load("hxopus", "hxopus_to_bytes", 1);
 }

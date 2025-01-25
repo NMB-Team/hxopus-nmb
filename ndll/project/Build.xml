@@ -4,15 +4,14 @@
 
 	<include name="${HXCPP}/build-tool/BuildCommon.xml" />
 
-	<files
-		id="common">
-		<compilerflag value="-Iinclude" />
+	<files id="common">
+		<compilerflag value="-Icherryaudio" />
 		<compilerflag value="-Iopus" />
 		<compilerflag value="-Iopus/include" />
 		<compilerflag value="-Iopus/celt" />
 		<compilerflag value="-Iopus/silk" />
 		<compilerflag value="-Iopus/silk/float" />
-		<compilerflag value="-Iopus_tools" />
+		<compilerflag value="-Iopusfile/src" />
 		<compilerflag value="-Iogg/include" />
 
 		<compilerflag value="-DUSE_ALLOCA" />
@@ -23,18 +22,21 @@
 		<compilerflag value="-DRANDOM_PREFIX=speex" />
 		<compilerflag value="-DSPX_RESAMPLE_EXPORT=" />
 
-
-		<compilerflag value="-Dinline=__inline" if="windows" />
 		<compilerflag value="-DWIN32" if="windows" />
 
-		<file name="common/ExternalInterface.cpp" />
+		<file name="common/CFFI.cpp" />
+
+		<file name="cherryaudio/cherryaudio.c" />
+
+		<file name="opusfile/src/http.c" />
+		<file name="opusfile/src/info.c" />
+		<file name="opusfile/src/internal.c" />
+		<file name="opusfile/src/opusfile.c" />
+		<file name="opusfile/src/stream.c" />
+		<file name="opusfile/src/wincerts.c" />
 
 		<file name="ogg/src/framing.c" />
 		<file name="ogg/src/bitwise.c" />
-
-		<file name="opus_tools/opus_header.c" />
-		<file name="opus_tools/resample.c" />
-
 
 		<file name="opus/src/analysis.c" />
 		<file name="opus/src/extensions.c" />
@@ -131,7 +133,7 @@
 		<file name="opus/silk/interpolate.c" />
 		<file name="opus/silk/lin2log.c" />
 		<file name="opus/silk/log2lin.c" />
-		<file name="opus/silk/LPC_FIT.c" />
+		<file name="opus/silk/LPC_fit.c" />
 		<file name="opus/silk/LPC_analysis_filter.c" />
 		<file name="opus/silk/LPC_inv_pred_gain.c" />
 		<file name="opus/silk/LP_variable_cutoff.c" />
@@ -179,17 +181,16 @@
 		<file name="opus/silk/VQ_WMat_EC.c" />
 	</files>
 
-
-
-
-	<set name="SLIBEXT" value=".lib"
-		if="windows" />
+	<set name="SLIBEXT" value=".lib" if="windows" />
 	<set name="SLIBEXT" value=".a" unless="windows" />
-	<set name="SLIBEXT"
-		value=".so" if="webos" />
+	<set name="SLIBEXT" value=".so" if="webos" />
 
 	<set name="DEBUGEXTRA" value="-debug" if="fulldebug" /> > <target
-		id="NDLL" output="${NDLL_NAME}" tool="linker" toolid="${STD_MODULE_LINK}">
+        id="NDLL"
+        output="${NDLL_NAME}"
+        tool="linker"
+        toolid="${STD_MODULE_LINK}"
+    >
 		<outdir name="../ndll/${BINDIR}" />
 		<ext value=".ndll" if="windows || mac || linux" />
 		<files id="common" />

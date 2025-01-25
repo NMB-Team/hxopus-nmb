@@ -1,18 +1,10 @@
 {
-    "name": "hxopus",
-    "url": "https://github.com/Vortex2Oblivion/hxopus",
-    "license": "MIT",
-    "tags": [
-      "externs",
-      "bindings",
-      "cpp",
-      "audio",
-      "opus"
-    ],
-    "description": "Opus codec in haxe.",
-    "version": "1.0.0",
-    "releasenote": "",
-    "contributors": [
-      "Vortex"
-    ]
-  }
+  "name": "hxopus",
+  "url": "https://github.com/Vortex2Oblivion/hxopus",
+  "license": "MIT",
+  "tags": ["externs", "bindings", "cpp", "audio", "opus"],
+  "description": "Opus codec in haxe.",
+  "version": "1.0.0",
+  "releasenote": "",
+  "contributors": ["Vortex"]
+}
