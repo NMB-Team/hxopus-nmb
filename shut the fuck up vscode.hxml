@@ -1,0 +1,4 @@
+--class-path opus
+--cpp test/bin
+--library openfl
+--library flixel

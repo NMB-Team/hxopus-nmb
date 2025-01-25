@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/ndll/project/opus/**",
+                "${workspaceFolder}/ndll/project/opus_tools/**",
+                "${workspaceFolder}/ndll/project/ogg/**",
+                "C:\\HaxeToolkit\\haxe\\lib\\hxcpp\\git\\**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.26100.0",
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64",
+            "compilerArgs": [
+                "-DHX_WINDOWS",
+                "-DUSE_ALLOCA",
+                "-DOPUS_BUILD",
+                "-DHAVE_CONFIG_H",
+                "-DOUTSIDE_SPEEX",
+                "-DFLOATING_POINT",
+                "-DRANDOM_PREFIX=speex",
+                "-DSPX_RESAMPLE_EXPORT=",
+                "-DWIN32"
+            ]
+        }
+    ],
+    "version": 4
+}
