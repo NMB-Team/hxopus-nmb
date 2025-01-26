@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <math.h>
+#include <opus_defines.h>
 
 typedef Array_obj<unsigned char> *ByteArray;
 

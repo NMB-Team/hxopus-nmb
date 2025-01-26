@@ -4,10 +4,12 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/ndll/project/cherryaudio/**",
                 "${workspaceFolder}/ndll/project/opus/**",
-                "${workspaceFolder}/ndll/project/opus_tools/**",
                 "${workspaceFolder}/ndll/project/ogg/**",
-                "C:\\HaxeToolkit\\haxe\\lib\\hxcpp\\git\\**"
+                "${workspaceFolder}/ndll/project/opusfile/**",
+                "C:\\HaxeToolkit\\haxe\\lib\\hxcpp\\git\\**",
+                "${workspaceFolder}/ndll/project/opus/include"
             ],
             "defines": [
                 "_DEBUG",
