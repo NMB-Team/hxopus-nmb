@@ -49,7 +49,7 @@ sound.play();
 
 // Or with the raw bytes
 var sound:FlxSound = Opus.toFlxSound(Assets.getBytes("path/to/your/sound.opus"));
-sound.play();'
+sound.play();
 ```
 
 ### Other
