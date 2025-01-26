@@ -2,9 +2,9 @@
   "name": "hxopus",
   "url": "https://github.com/Vortex2Oblivion/hxopus",
   "license": "MIT",
-  "tags": ["externs", "bindings", "cpp", "audio", "opus"],
-  "description": "Opus codec in haxe.",
+  "tags": ["externs", "bindings", "cpp", "audio", "opus" ,"flixel", "openfl", "ndll"],
+  "description": "Support for decoding and playing the opus audio format in haxe.",
   "version": "1.0.0",
-  "releasenote": "",
+  "releasenote": "First release yay!",
   "contributors": ["Vortex"]
 }
