@@ -2,10 +2,15 @@ package hxopus;
 
 import sys.io.File;
 import haxe.io.BytesData;
+#if cpp
 import cpp.Lib;
+#else
+import neko.Lib;
+#end
 import haxe.io.Bytes;
 #if openfl
 import openfl.media.Sound;
+import openfl.utils.Assets;
 import openfl.utils.ByteArray;
 #end
 #if flixel
@@ -46,7 +51,7 @@ class Opus {
 	 * @return Sound
 	 */
 	public overload extern inline static function toOpenFL(file:String):Sound {
-		return returnSound(Bytes.ofData(getDecodedBytes(File.getBytes(file))));
+		return returnSound(Bytes.ofData(getDecodedBytes(Assets.getBytes(file))));
 	}
 
 	private static function returnSound(frames:Bytes):Sound {
