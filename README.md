@@ -57,6 +57,9 @@ Bytes.ofData(Opus.getDecodedBytes(bytes:Bytes));
 ### Credits
 
 [Xiph.org Foundation](https://xiph.org/) - [Libopus](https://github.com/xiph/opus) and [Opusfile](https://github.com/xiph/opusfile) libraries.
+
 [Gian-Carlo Pascutto](https://github.com/gcp) - [Libogg](https://github.com/gcp/libogg).
+
 [Cherry](https://git.gay/cherry) - [CherryAudio](https://git.gay/cherry/cherryaudio) used for decoding the opus files and helping me optimize the opus loader.
+
 [Carlos Ballesteros Velasco](https://github.com/soywiz) - [OpenFL-Opus](https://lib.haxe.org/p/openfl-opus/) Referenced a lot when making the ndll for hxopus.
