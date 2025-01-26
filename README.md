@@ -14,6 +14,12 @@ This library works on the C++ target only!
 ### Installation
 
 ```bash
+haxelib install hxopus
+```
+
+Or through git.
+
+```bash
 haxelib git hxopus https://github.com/Vortex2Oblivion/hxopus.git
 ```
 
