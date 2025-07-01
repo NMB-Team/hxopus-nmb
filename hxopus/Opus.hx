@@ -1,12 +1,7 @@
 package hxopus;
 
-import sys.io.File;
+import cpp.ConstCharStar;
 import haxe.io.BytesData;
-#if cpp
-import cpp.Lib;
-#else
-import neko.Lib;
-#end
 import haxe.io.Bytes;
 #if openfl
 import openfl.media.Sound;
@@ -17,13 +12,15 @@ import openfl.utils.ByteArray;
 import flixel.sound.FlxSound;
 #end
 
-class Opus {
+@:buildXml("<include name='${haxelib:hxopus}/build.xml' />")
+@:include("hxopus.hpp")
+extern class Opus {
 	/**
 	 * Gets the current version of libopus.
 	 * @return String
 	 */
-	public static inline function getVersionString():String {
-		return _getVersion();
+	public static inline function getVersionString():ConstCharStar {
+		return opus_get_version_string();
 	}
 
 	/**
@@ -32,7 +29,7 @@ class Opus {
 	 * @return BytesData
 	 */
 	public static inline function getDecodedBytes(encodedBytes:Bytes):BytesData {
-		return _decodeBytes(encodedBytes.getData());
+		return hxopus_to_bytes(encodedBytes.getData());
 	}
 
 	#if openfl
@@ -54,7 +51,7 @@ class Opus {
 		return returnSound(Bytes.ofData(getDecodedBytes(Assets.getBytes(file))));
 	}
 
-	private static function returnSound(frames:Bytes):Sound {
+	private inline static function returnSound(frames:Bytes):Sound {
 		var sound:Sound = new Sound();
 		// 4 because 2 channels (stereo) times 2 bytes per pcm frame (short16)
 		var frameCount:Int = Math.floor(frames.length / 4);
@@ -89,6 +86,9 @@ class Opus {
 	}
 	#end
 
-	private static var _getVersion:Dynamic = Lib.load("hxopus", "hxopus_get_version_string", 0);
-	private static var _decodeBytes:Dynamic = Lib.load("hxopus", "hxopus_to_bytes", 1);
+	@:native("hxopus_get_version_string")
+	private static function opus_get_version_string():ConstCharStar;
+
+	@:native("hxopus_to_bytes")
+	private static function hxopus_to_bytes(encodedBytes:BytesData):BytesData;
 }
