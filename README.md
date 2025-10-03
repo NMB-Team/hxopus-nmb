@@ -14,13 +14,7 @@ This library works on the C++ target only!
 ### Installation
 
 ```bash
-haxelib install hxopus
-```
-
-Or through git.
-
-```bash
-haxelib git hxopus https://github.com/Vortex2Oblivion/hxopus.git
+haxelib git hxopus https://github.com/NMB-Team/hxopus-nmb
 ```
 
 ### Usage
@@ -71,3 +65,4 @@ Bytes.ofData(Opus.getDecodedBytes(bytes:Bytes));
 [Carlos Ballesteros Velasco](https://github.com/soywiz) - [OpenFL-Opus](https://lib.haxe.org/p/openfl-opus/) Referenced a lot when making hxopus.
 
 [Prio](https://www.youtube.com/channel/UChNtItn8z2v51fjNhwiDQHQ) - [Shockwave Shuffle](https://www.youtube.com/watch?v=q4TIa9ZIQPU) Song used for testing playback.
+
