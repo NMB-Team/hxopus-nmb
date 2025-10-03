@@ -18,12 +18,19 @@
 #include "config.h"
 #endif
 
+/* For Android platform */
+#if defined(__ANDROID__)
+#define _LARGEFILE_SOURCE
+#define _LARGEFILE64_SOURCE
+#endif
+
 #include "internal.h"
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#include <limits.h>
 #if defined(_WIN32)
 # include <io.h>
 #endif
@@ -99,7 +106,22 @@ static int op_fseek(void *_stream,opus_int64 _offset,int _whence){
 #else
   /*This function actually conforms to the SUSv2 and POSIX.1-2001, so we prefer
      it except on Windows.*/
-  return fseeko((FILE *)_stream,(off_t)_offset,_whence);
+    #if defined(__ANDROID__)
+    /* On Android, use fseeko64 if available, otherwise fall back to fseek */
+    #ifdef HAVE_FSEEKO64
+      return fseeko64((FILE *)_stream, (off64_t)_offset, _whence);
+    #else
+      /* Fallback for Android versions without fseeko64 */
+      if (_offset > LONG_MAX || _offset < LONG_MIN) {
+        /* Offset is too large for fseek */
+        errno = EOVERFLOW;
+        return -1;
+      }
+      return fseek((FILE *)_stream, (long)_offset, _whence);
+    #endif
+  #else
+    return fseeko((FILE *)_stream,(off_t)_offset,_whence);
+  #endif
 #endif
 }
 
@@ -114,7 +136,19 @@ static opus_int64 op_ftell(void *_stream){
 #else
   /*This function actually conforms to the SUSv2 and POSIX.1-2001, so we prefer
      it except on Windows.*/
-  return ftello((FILE *)_stream);
+    #if defined(__ANDROID__)
+    /* On Android, use ftello64 if available, otherwise fall back to ftell */
+    #ifdef HAVE_FTELLO64
+      return ftello64((FILE *)_stream);
+    #else
+      /* Fallback for Android versions without ftello64 */
+      long pos = ftell((FILE *)_stream);
+      if (pos == -1) return -1;
+      return (opus_int64)pos;
+    #endif
+  #else
+    return ftello((FILE *)_stream);
+  #endif
 #endif
 }
 
